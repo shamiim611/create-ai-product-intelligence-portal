@@ -1,0 +1,24 @@
+{
+  "name": "create-ai-product-intelligence-portal",
+  "version": "1.0.0",
+  "description": "CreateAI Product Intelligence Dashboard - Outcome-centric, user-centric sales dashboard",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "createai",
+    "dashboard",
+    "product-intelligence",
+    "asu"
+  ],
+  "author": "ASU CreateAI Team",
+  "license": "MIT",
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
