@@ -253,7 +253,6 @@ svg.bar-chart text{font-family:'JetBrains Mono',monospace;fill:var(--ink);}
   <div class="nav-links">
     <a class="nav-link" data-route="home" href="#home">Home</a>
     <a class="nav-link" data-route="products" href="#products">Products</a>
-    <a class="nav-link" data-route="capabilities" href="#capabilities">Capabilities</a>
     <a class="nav-link" data-route="strategic-launches" href="#strategic-launches">Strategic Launches</a>
     <a class="nav-link" data-route="platform-evolution" href="#platform-evolution">Platform Evolution</a>
     <a class="nav-link" data-route="release-explorer" href="#release-explorer">Release Explorer</a>
@@ -286,9 +285,8 @@ let rexFilters = {product:'all',month:'all',category:'all',q:''};
 let openRexMonths = {};
 
 /* ── ROUTER ── */
-const ROUTES = {home:renderHome,products:renderProducts,capabilities:renderCapabilities,
-  'strategic-launches':renderStrategicLaunches,'platform-evolution':renderPlatformEvolution,
-  'release-explorer':renderReleaseExplorer,insights:renderInsights};
+const ROUTES = {home:renderHome,products:renderProducts,'strategic-launches':renderStrategicLaunches,
+  'platform-evolution':renderPlatformEvolution,'release-explorer':renderReleaseExplorer,insights:renderInsights};
 function navigate(route){
   const fn = ROUTES[route] || ROUTES.home;
   document.getElementById('app').innerHTML = fn();
@@ -303,12 +301,6 @@ window.addEventListener('hashchange',()=>navigate(location.hash.slice(1)||'home'
 ══════════════════════════════════════════════ */
 function renderHome(){
   const featuredLaunches = strategic_launches.slice(0,6);
-  const phaseHtml = phases.map(p=>`
-    <div class="mt-phase">
-      <div class="mt-dot" style="background:${p.color}">${p.number}</div>
-      <div class="mt-name">${esc(p.name)}</div>
-      <div class="mt-period">${esc(p.period)}</div>
-    </div>`).join('');
   const buildCardsHtml = build_cards.map(c=>`
     <div class="build-card" data-bc="${c.id}">
       <div class="bc-icon">${c.icon}</div>
@@ -334,23 +326,23 @@ function renderHome(){
       <p>Faculty, researchers, and staff are using CreateAI to automate repetitive questions, scale their impact, and focus on what matters. 40+ AI models. Your data. Proven results across ASU.</p>
     </div>
     <hr class="section-sep">
-    <div class="page-eyebrow">Why CreateAI Works</div>
-    <div class="section-label" style="margin-bottom:16px">Real impact across ASU</div>
+    <div class="page-eyebrow">Real Impact Across ASU</div>
+    <div class="section-label" style="margin-bottom:16px">Growing adoption, expanding reach</div>
     <div class="card-grid-3" style="margin-bottom:28px">
       <div class="card" style="text-align:center;padding:24px">
-        <div style="font-size:32px;font-weight:700;color:var(--maroon);font-family:'Space Grotesk',sans-serif;margin-bottom:4px">294</div>
-        <div style="font-size:13px;color:var(--slate);font-family:'JetBrains Mono',monospace">Releases (24 months)</div>
-        <div style="margin-top:8px;font-size:12px;color:#4A453E;line-height:1.4">High-velocity development. From basic chat to full enterprise AI platform.</div>
+        <div style="font-size:32px;font-weight:700;color:var(--maroon);font-family:'Space Grotesk',sans-serif;margin-bottom:4px">31,757</div>
+        <div style="font-size:13px;color:var(--slate);font-family:'JetBrains Mono',monospace">Engaged Users</div>
+        <div style="margin-top:8px;font-size:12px;color:#4A453E;line-height:1.4">Faculty, researchers, staff, and students using CreateAI across campus.</div>
       </div>
       <div class="card" style="text-align:center;padding:24px">
-        <div style="font-size:32px;font-weight:700;color:var(--maroon);font-family:'Space Grotesk',sans-serif;margin-bottom:4px">40+</div>
-        <div style="font-size:13px;color:var(--slate);font-family:'JetBrains Mono',monospace">AI Models</div>
-        <div style="margin-top:8px;font-size:12px;color:#4A453E;line-height:1.4">GPT, Claude, Gemini, Llama, Gemma. Choose the right tool for every job.</div>
+        <div style="font-size:32px;font-weight:700;color:var(--maroon);font-family:'Space Grotesk',sans-serif;margin-bottom:4px">9,060</div>
+        <div style="font-size:13px;color:var(--slate);font-family:'JetBrains Mono',monospace">Projects Created</div>
+        <div style="margin-top:8px;font-size:12px;color:#4A453E;line-height:1.4">AI solutions built and deployed across departments and disciplines.</div>
       </div>
       <div class="card" style="text-align:center;padding:24px">
-        <div style="font-size:32px;font-weight:700;color:var(--maroon);font-family:'Space Grotesk',sans-serif;margin-bottom:4px">5</div>
-        <div style="font-size:13px;color:var(--slate);font-family:'JetBrains Mono',monospace">Product Phases</div>
-        <div style="margin-top:8px;font-size:12px;color:#4A453E;line-height:1.4">Foundation → Enterprise Platform. Each phase unlocked new outcomes.</div>
+        <div style="font-size:32px;font-weight:700;color:var(--maroon);font-family:'Space Grotesk',sans-serif;margin-bottom:4px">2,739</div>
+        <div style="font-size:13px;color:var(--slate);font-family:'JetBrains Mono',monospace">New Users (April)</div>
+        <div style="margin-top:8px;font-size:12px;color:#4A453E;line-height:1.4">Nearly 1 in 2 staff, 1 in 3 faculty, 1 in 8 students engaged with CreateAI.</div>
       </div>
     </div>
     <hr class="section-sep">
@@ -367,11 +359,6 @@ function renderHome(){
     <div class="section-label" style="margin-bottom:16px">Moments that changed what's possible</div>
     <div class="home-launches-grid">${launchesHtml}</div>
     <span class="see-all" data-route="strategic-launches">See all 10 launches that shaped the platform →</span>
-    <hr class="section-sep">
-    <div class="page-eyebrow">Platform Evolution</div>
-    <div class="section-label" style="margin-bottom:16px">How CreateAI became a full platform</div>
-    <div class="mini-timeline">${phaseHtml}</div>
-    <span class="see-all" data-route="platform-evolution">Explore the full story →</span>
   </div>`;
 }
 function renderBuildDetail(id){
@@ -653,20 +640,11 @@ function renderInsights(){
     });
     xLabels+=`<text x="${x+barW/2}" y="${padT+chartH+14}" text-anchor="middle" font-size="9" fill="var(--slate)">${q}</text>`;
   });
-  const velocityMax = Math.max(...qs.map(q=>METRICS.quarterly[q]?.total||0));
-  const prodTotal = METRICS.product;
-  const maxProd = Math.max(...Object.values(prodTotal).map(v=>v.total||0));
-  const prodBars = Object.entries(prodTotal).sort((a,b)=>b[1].total-a[1].total).map(([p,v])=>`
-    <div class="prod-bar-row">
-      <span class="pbr-label">${esc(p)}</span>
-      <div class="pbr-track"><div class="pbr-fill" style="width:${Math.round((v.total/maxProd)*100)}%;background:${PRODUCT_COLOR[p]||'var(--maroon)'}"></div></div>
-      <span class="pbr-n">${v.total}</span>
-    </div>`).join('');
   const legend = cats.map((c,i)=>`<span class="leg-item"><span class="leg-dot" style="background:${catColors[i]}"></span>${c}</span>`).join('');
   return `<div class="page">
     <div class="page-eyebrow">Insights</div>
     <div class="page-title">Product Intelligence</div>
-    <div class="page-sub">What the release data reveals about where investment is going and how the platform is evolving.</div>
+    <div class="page-sub">Platform growth and investment trends at a glance.</div>
     <div class="section-label">Platform Growth Metrics</div>
     <div class="growth-grid" style="margin-bottom:36px">
       <div class="growth-stat"><div class="gs-label">Model Library</div><div class="gs-before">~30 models at launch</div><div class="gs-arrow">↓</div><div class="gs-after">40+</div><div class="gs-when">as of Jul 2024, growing</div></div>
@@ -683,43 +661,6 @@ function renderInsights(){
         </svg>
       </div>
       <div class="legend-row">${legend}</div>
-    </div>
-    <div class="insights-grid">
-      <div class="ins-card">
-        <div class="ins-title">Releases by Product</div>
-        <div class="ins-sub">Total releases since June 2024</div>
-        ${prodBars}
-      </div>
-      <div class="ins-card">
-        <div class="ins-title">Release Categories — All Time</div>
-        <div class="ins-sub">What type of work shipped</div>
-        ${cats.map(cat=>{
-          const n=Object.values(METRICS.quarterly).reduce((s,q)=>s+(q[cat]||0),0);
-          return `<div class="prod-bar-row">
-            <span class="pbr-label" style="width:130px;font-size:11px">${esc(cat)}</span>
-            <div class="pbr-track"><div class="pbr-fill" style="width:${Math.round((n/DATA.meta.total)*100)}%;background:${CAT_COLOR[cat]}"></div></div>
-            <span class="pbr-n">${n}</span>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>
-    <div class="ins-card">
-      <div class="ins-title">Investment Themes — What the data says</div>
-      <div class="ins-sub">Patterns derived from 294 releases over 24 months</div>
-      <div class="card-grid-3" style="margin-top:4px">
-        <div style="padding:14px;background:var(--paper);border-radius:var(--r);border:1px solid var(--border)">
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px">🔧 Reliability First</div>
-          <p style="font-size:13px;color:#4A453E;line-height:1.5">Resolved Issues are the second-largest category. The team ships features fast and fixes quickly — a high-velocity product culture.</p>
-        </div>
-        <div style="padding:14px;background:var(--paper);border-radius:var(--r);border:1px solid var(--border)">
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px">🏗️ Builder-Centric</div>
-          <p style="font-size:13px;color:#4A453E;line-height:1.5">Builder receives 56% of all releases. It's the platform's primary creative surface — the most complex and most actively developed product.</p>
-        </div>
-        <div style="padding:14px;background:var(--paper);border-radius:var(--r);border:1px solid var(--border)">
-          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;margin-bottom:6px">♿ Accessibility Commitment</div>
-          <p style="font-size:13px;color:#4A453E;line-height:1.5">Dedicated accessibility releases appear in every major phase — not as an afterthought but as a consistent delivery stream.</p>
-        </div>
-      </div>
     </div>
   </div>`;
 }
