@@ -256,7 +256,6 @@ svg.bar-chart text{font-family:'JetBrains Mono',monospace;fill:var(--ink);}
     <a class="nav-link" data-route="strategic-launches" href="#strategic-launches">Strategic Launches</a>
     <a class="nav-link" data-route="platform-evolution" href="#platform-evolution">Platform Evolution</a>
     <a class="nav-link" data-route="release-explorer" href="#release-explorer">Release Explorer</a>
-    <a class="nav-link" data-route="insights" href="#insights">Insights</a>
   </div>
 </nav>
 <div id="app"></div>
@@ -286,7 +285,7 @@ let openRexMonths = {};
 
 /* ── ROUTER ── */
 const ROUTES = {home:renderHome,products:renderProducts,'strategic-launches':renderStrategicLaunches,
-  'platform-evolution':renderPlatformEvolution,'release-explorer':renderReleaseExplorer,insights:renderInsights};
+  'platform-evolution':renderPlatformEvolution,'release-explorer':renderReleaseExplorer};
 function navigate(route){
   const fn = ROUTES[route] || ROUTES.home;
   document.getElementById('app').innerHTML = fn();
